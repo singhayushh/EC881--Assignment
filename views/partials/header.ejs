@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>EC881 Assignment | Diabetic Retinopathy</title>
+  <!-- CSS files -->
+  <link href="/css/tabler.min.css?1668287865" rel="stylesheet" />
+  <link href="/css/tabler-flags.min.css?1668287865" rel="stylesheet" />
+  <link href="/css/tabler-payments.min.css?1668287865" rel="stylesheet" />
+  <link href="/css/tabler-vendors.min.css?1668287865" rel="stylesheet" />
+  <link href="/css/demo.min.css?1668287865" rel="stylesheet" />
+  <meta name="msapplication-TileColor" content="{{ site.data.colors.blue }}" />
+  <meta name="theme-color" content="{{ site.data.colors.blue }}" />
+
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="HandheldFriendly" content="True" />
+  <meta name="MobileOptimized" content="320" />
+
+  <link rel="icon" href="/img/favicon.ico" type="image/x-icon" />
+  <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon" />
+
+  <meta name="description"
+    content="Diabetic Retinopathy Detection and its ICDR Classification based on a CNN Model built in EfficientNet" />
+  <style>
+    @import url('https://rsms.me/inter/inter.css');
+
+    :root {
+      --tblr-font-sans-serif: Inter, -apple-system, BlinkMacSystemFont, San Francisco, Segoe UI, Roboto, Helvetica Neue, sans-serif;
+    }
+  </style>
+</head>
+
+<body>
+  <script src="/js/demo-theme.min.js?1668287865"></script>
+  <div class="page">
+
+    <!-- Navbar -->
+    <div class="sticky-top">
+      <header class="navbar navbar-expand-md navbar-light sticky-top d-print-none">
+        <div class="container-xl">
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-menu"
+            aria-controls="navbar-menu" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <h1 class="navbar-brand navbar-brand-autodark d-none-navbar-horizontal pe-0 pe-md-3">
+            <a href="/">
+              <img src="/img/logo.png" width="110" height="32" alt="EC 881 | KGEC" class="navbar-brand-image">
+            </a>
+          </h1>
+          <div class="navbar-nav flex-row order-md-last">
+            <div class="nav-item d-none d-md-flex me-3">
+              <div class="btn-list">
+                <a href="https://github.com/singhayushh/EC881--Assignment" class="btn" target="_blank" rel="noreferrer">
+                  <!-- Download SVG icon from http://tabler-icons.io/i/brand-github -->
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24"
+                    stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                    <path
+                      d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+                  </svg>
+                  Source code
+                </a>
+                <a href="https://github.com/sponsors/codecalm" class="btn" target="_blank" rel="noreferrer">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-download" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                      <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                      <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2"></path>
+                      <path d="M7 11l5 5l5 -5"></path>
+                      <path d="M12 4l0 12"></path>
+                  </svg>
+                  Download Report
+                
+                </a>
+              </div>
+            </div>
+            <div class="nav-item dropdown">
+              <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown"
+                aria-label="Open user menu">
+                <span class="avatar avatar-sm" style="background-image: url('<%= user?.image ? user?.image : `/img/avatar.svg` %>')"></span>
+                <div class="d-none d-xl-block ps-2">
+                  <div><%= user?.fullName %></div>
+                  <div class="mt-1 small text-muted"><%= user?.username %></div>
+                </div>
+              </a>
+              <div class="dropdown-menu dropdown-menu-end dropdown-menu-arrow">
+                <a href="?theme=dark" class="dropdown-item hide-theme-dark">Enable dark mode</a>
+                <a href="?theme=light" class="dropdown-item hide-theme-light">Enable light mode</a>
+                <div class="dropdown-divider"></div>
+                <a href="/settings" class="dropdown-item">Settings</a>
+                <% if (!user) { %>
+                <a href="/sign-in" class="dropdown-item">Sign In</a>
+                <% } else { %>
+                <a href="/sign-out" class="dropdown-item">Sign out</a>
+                <% } %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+      <div class="navbar-expand-md">
+        <div class="collapse navbar-collapse" id="navbar-menu">
+          <div class="navbar navbar-light">
+            <div class="container-xl">
+              <ul class="navbar-nav">
+                <% if (page ==="home") { %>
+                <li class="nav-item active">
+                <% } else { %>
+                 <li class="nav-item">
+                <% } %>
+                  <a class="nav-link" href="/">
+                    <span
+                      class="nav-link-icon d-md-none d-lg-inline-block">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-notebook" width="24" height="24" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M6 4h11a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-11a1 1 0 0 1 -1 -1v-14a1 1 0 0 1 1 -1m3 0v18"></path>
+                        <path d="M13 8l2 0"></path>
+                        <path d="M13 12l2 0"></path>
+                      </svg>
+                    </span>
+                    <span class="nav-link-title">
+                      EC 881 Assignment
+                    </span>
+                  </a>
+                </li>
+                <% if (page ==="about") { %>
+                <li class="nav-item active">
+                <% } else { %>
+                 <li class="nav-item">
+                <% } %>
+                  <a class="nav-link" href="/about">
+                    <span
+                      class="nav-link-icon d-md-none d-lg-inline-block">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brain" width="24" height="24" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M15.5 13a3.5 3.5 0 0 0 -3.5 3.5v1a3.5 3.5 0 0 0 7 0v-1.8"></path>
+                        <path d="M8.5 13a3.5 3.5 0 0 1 3.5 3.5v1a3.5 3.5 0 0 1 -7 0v-1.8"></path>
+                        <path d="M17.5 16a3.5 3.5 0 0 0 0 -7h-.5"></path>
+                        <path d="M19 9.3v-2.8a3.5 3.5 0 0 0 -7 0"></path>
+                        <path d="M6.5 16a3.5 3.5 0 0 1 0 -7h.5"></path>
+                        <path d="M5 9.3v-2.8a3.5 3.5 0 0 1 7 0v10"></path>
+                      </svg>
+                    </span>
+                    <span class="nav-link-title">
+                      About The Model
+                    </span>
+                  </a>
+                </li>
+                <% if (page ==="predict") { %>
+                <li class="nav-item active">
+                <% } else { %>
+                 <li class="nav-item">
+                <% } %>
+                  <a class="nav-link" href="/predict">
+                    <span
+                      class="nav-link-icon d-md-none d-lg-inline-block">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-scan-eye" width="24" height="24" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M4 8v-2a2 2 0 0 1 2 -2h2"></path>
+                        <path d="M4 16v2a2 2 0 0 0 2 2h2"></path>
+                        <path d="M16 4h2a2 2 0 0 1 2 2v2"></path>
+                        <path d="M16 20h2a2 2 0 0 0 2 -2v-2"></path>
+                        <path d="M7 12c3.333 -4.667 6.667 -4.667 10 0"></path>
+                        <path d="M7 12c3.333 4.667 6.667 4.667 10 0"></path>
+                        <path d="M12 12h-.01"></path>
+                      </svg>
+                    </span>
+                    <span class="nav-link-title">
+                      Live Detection
+                    </span>
+                  </a>
+                </li>
+                <% if (page ==="team") { %>
+                <li class="nav-item active">
+                <% } else { %>
+                 <li class="nav-item">
+                <% } %>
+                  <a class="nav-link" href="/team">
+                    <span
+                      class="nav-link-icon d-md-none d-lg-inline-block">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-school" width="24" height="24" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M22 9l-10 -4l-10 4l10 4l10 -4v6"></path>
+                        <path d="M6 10.6v5.4a6 3 0 0 0 12 0v-5.4"></path>
+                      </svg>
+                    </span>
+                    <span class="nav-link-title">
+                      Project Authors
+                    </span>
+                  </a>
+                </li>
+                <% if (page ==="acknowledgement") { %>
+                <li class="nav-item active">
+                <% } else { %>
+                 <li class="nav-item">
+                <% } %>
+                  <a class="nav-link" href="/acknowledgements">
+                    <span
+                      class="nav-link-icon d-md-none d-lg-inline-block">
+                      <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-heart-handshake" width="24" height="24" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572"></path>
+                        <path d="M12 6l-3.293 3.293a1 1 0 0 0 0 1.414l.543 .543c.69 .69 1.81 .69 2.5 0l1 -1a3.182 3.182 0 0 1 4.5 0l2.25 2.25"></path>
+                        <path d="M12.5 15.5l2 2"></path>
+                        <path d="M15 13l2 2"></path>
+                      </svg>
+                    </span>
+                    <span class="nav-link-title">
+                      Acknowledgement
+                    </span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="page-wrapper">

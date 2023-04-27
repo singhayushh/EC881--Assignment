@@ -1,0 +1,153 @@
+<%- include('partials/header.ejs') %>
+  <link href="/libs/dropzone/dist/dropzone.css?1668287865" rel="stylesheet" />
+
+  <div class="page-header d-print-none">
+    <div class="container-xl">
+      <div class="row g-2 align-items-center">
+        <div class="col">
+          <h2 class="page-title">
+            Live Detection and Classification of Diabetic Retinopathy
+          </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="page-body">
+    <div class="container-xl">
+      <form action="/predict" method="post" enctype="">
+        <div class="row row-cards">
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-body">
+                <h3 class="card-title">Left Eye</h3>
+                <div class="dropzone" id="left_eye">
+                  <div class="fallback">
+                    <input name="file" type="file" />
+                  </div>
+                  <div class="dz-message">
+                    <h3 class="dropzone-msg-title">Drop file here</h3>
+                    <span class="dropzone-msg-desc">Upload the left eye image of the patient</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card">
+              <div class="card-body">
+                <h3 class="card-title">Right Eye</h3>
+                <div class="dropzone" id="right_eye">
+                  <div class="fallback">
+                    <input name="right_eye" type="file" />
+                  </div>
+                  <div class="dz-message">
+                    <h3 class="dropzone-msg-title">Drop file here</h3>
+                    <span class="dropzone-msg-desc">Upload the right eye image of the patient</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <style>
+            .dz-preview { width: calc(100% - 32px) !important;}
+            .dz-image, .dz-image img {width: 100% !important; height: auto !important;}
+          </style>
+          <div class="col-lg-4">
+            <div class="row row-cards">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-header">
+                    <h3 class="card-title">Result Notifications</h3>
+                  </div>
+                  <div class="card-body">
+                    <p class="card-subtitle" style="text-align: justify;">Send an automated message over phone or email to the patient once the machine learning model completes processing the images and computing the results.</p>
+                    <div class="mb-3">
+                      <div class="divide-y">
+                        <div>
+                          <label class="row">
+                            <span class="col">SMS Notifications</span>
+                            <span class="col-auto">
+                              <label class="form-check form-check-single form-switch">
+                                <input class="form-check-input" type="checkbox" name="smsNotifiation">
+                              </label>
+                            </span>
+                          </label>
+                        </div>
+                        <div>
+                          <label class="row">
+                            <span class="col">Email Notifications</span>
+                            <span class="col-auto">
+                              <label class="form-check form-check-single form-switch">
+                                <input class="form-check-input" type="checkbox" name="emailNotification">
+                              </label>
+                            </span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer">
+                    Twilio account needs to be <a href="#">activated</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-8">
+            <div class="row row-cards">
+              <div class="col-12">
+                <div class="card">
+                  <div class="card-body">
+                    <h3 class="card-title">Patient Details</h3>
+                    <div class="row row-cards">
+                      <div class="col-md-4">
+                        <div class="mb-3">
+                          <label class="form-label">Name</label>
+                          <input type="text" class="form-control" placeholder="Full name of the patient" value=""
+                            name="name">
+                        </div>
+                      </div>
+                      <div class="col-sm-6 col-md-4">
+                        <div class="mb-3">
+                          <label class="form-label">Age</label>
+                          <input type="text" class="form-control" placeholder="Age of the patient" value="" name="age">
+                        </div>
+                      </div>
+                      <div class="col-sm-6 col-md-4">
+                        <div class="mb-3">
+                          <label class="form-label">Gender</label>
+                          <select class="form-control form-select" name="gender">
+                            <option value="Male">Male</option>
+                            <option value="Male">Female</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div class="col-sm-6 col-md-6">
+                        <div class="mb-3">
+                          <label class="form-label">Email</label>
+                          <input type="email" class="form-control" placeholder="Email of the patient" value=""
+                            name="email">
+                        </div>
+                      </div>
+                      <div class="col-sm-6 col-md-6">
+                        <div class="mb-3">
+                          <label class="form-label">Phone</label>
+                          <input type="text" class="form-control" placeholder="Phone number of the patient" value=""
+                            name="phone">
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card-footer text-end">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <%- include('partials/footer.ejs') %>
