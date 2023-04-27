@@ -20,4 +20,20 @@ The assignment to normally include:
 
 In this project we build an application for the identification and classification of diabetic retinopathy from fundus images of human eyes.
 
-> - To be updated soon -
+### Instructions to get a local running copy of the project
+
+#### First-time installation
+
+- [x] Clone this github repository
+- [x] Create a .env file with `PORT` `MONGO_URI` `JWT_SECRET` `JWT_EXPIRY`
+- [x] Create a python virtualenv
+- [x] Activate the virtualenv
+- [x] Run `pip install -r requirements.txt`
+- [x] Run `npm install`
+
+#### Running the web application
+
+- [x] Activate the virtualenv
+- [x] Run `npm run start`
+
+The web application will now be running at the defined port which you specified in your .env file
