@@ -42,7 +42,6 @@ const GetPrediction = async (req: Request, res: Response) => {
 
         return res.status(200).json({ path: `/result/${prediction.id}` });
     } catch (error) {
-        console.log(error)
         return res.status(200).json({ path: `/result/error` });
     }
 };
@@ -98,7 +97,7 @@ const SignIn = async (req: Request, res: Response) => {
     if (!matchPassword) return res.redirect("/sign-in");
 
     const token = sign(
-        user,
+        user.toJSON(),
         String(process.env.JWT_SECRET)
     );
 
@@ -117,18 +116,19 @@ const SignOut = async (req: Request, res: Response) => {
         httpOnly: true,
         secure: false,
     });
-    return res.redirect("/home");
+    return res.redirect("/");
 };
 
 const SignUp = async (req: Request, res: Response) => {
     const userDto: UserDto = { ...req.body };
+    userDto.username = userDto.email.split('@')[0].replace(/[^a-z0-9]/gi, '');
     let user = await FetchByEmail(userDto.email);
     if (user) return res.redirect("/sign-up");
     
     user = await Create(userDto);
 
     const token = sign(
-        user,
+        user.toJSON(),
         String(process.env.JWT_SECRET)
     );
 

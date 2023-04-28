@@ -29,14 +29,12 @@ $(function () {
                 form.append(paramName, file)
             })
         })
-        console.log(form);
         $.ajax({
             method: 'POST',
             data: form,
             processData: false,
             contentType: false,
             success: function (response) {
-                console.log(response);
                 window.location = response.path;
             }
         });
