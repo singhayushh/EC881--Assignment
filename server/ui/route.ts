@@ -10,6 +10,7 @@ UIRouter.get("/about", ui.RenderAbout);
 UIRouter.get("/sign-in", ui.RenderSignIn);
 UIRouter.get("/sign-up", ui.RenderSignUp);
 UIRouter.get("/predict", ui.RenderPredict);
+UIRouter.get("/results", ui.RenderResults);
 UIRouter.get("/result/:id", ui.RenderResult);
 UIRouter.get("/acknowledgements", ui.RenderAcknowledgement);
 

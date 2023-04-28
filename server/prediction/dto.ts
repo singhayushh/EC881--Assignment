@@ -20,10 +20,21 @@ type PredictionDto = {
 };
 
 type PredictionSchemaDto = PredictionDto & Document;
-type PredictionUpdateDto = Partial<Omit<PredictionDto, "password">>;
+type PredictionUpdateDto = Partial<PredictionDto>;
+
+type StatDto = {
+    dr0: number;
+    dr1: number;
+    dr2: number;
+    dr3: number;
+    dr4: number;
+    scans: number;
+    execTime: number;
+};
 
 export {
     PredictionDto,
     PredictionSchemaDto,
     PredictionUpdateDto,
+    StatDto,
 };

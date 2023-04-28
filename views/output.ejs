@@ -1,95 +1,188 @@
 <%- include('partials/header.ejs') %>
 
-<div class="page-header d-print-none">
-    <div class="container">
-        <div class="row g-3 align-items-center">
-            <div class="col-auto">
-                <span class="status-indicator status-green status-indicator-animated">
-                    <span class="status-indicator-circle"></span>
-                    <span class="status-indicator-circle"></span>
-                    <span class="status-indicator-circle"></span>
-                </span>
-            </div>
-            <div class="col">
-                <h2 class="page-title">
-                    Prediction Results
-                </h2>
-                <div class="text-muted">
-                    <ul class="list-inline list-inline-dots mb-0">
-                        <li class="list-inline-item"><span class="text-green">Ready</span></li>
-                        <li class="list-inline-item">Execution time: <%= prediction.executionTime %> miliseconds</li>
-                    </ul>
+    <div class="page-header d-print-none">
+        <div class="container">
+            <div class="row g-3 align-items-center">
+                <div class="col-auto">
+                    <span class="status-indicator status-green status-indicator-animated">
+                        <span class="status-indicator-circle"></span>
+                        <span class="status-indicator-circle"></span>
+                        <span class="status-indicator-circle"></span>
+                    </span>
                 </div>
+                <div class="col">
+                    <h2 class="page-title">
+                        Prediction Results
+                    </h2>
+                    <div class="text-muted">
+                        <ul class="list-inline list-inline-dots mb-0">
+                            <li class="list-inline-item"><span class="text-green">Ready</span></li>
+                            <li class="list-inline-item">Execution time: <%= prediction.executionTime %> miliseconds
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-auto ms-auto d-print-none">
+                    <div class="btn-list">
+                      <a href="/predict" class="btn btn-primary d-none d-sm-inline-block">
+                        <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 5l0 14"></path><path d="M5 12l14 0"></path></svg>
+                        Scan a new patient
+                      </a>
+                      <a href="#" class="btn btn-primary d-sm-none btn-icon" aria-label="Scan a new patient">
+                        <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"></path><path d="M12 5l0 14"></path><path d="M5 12l14 0"></path></svg>
+                      </a>
+                    </div>
+                  </div>
             </div>
-            <div class="col-md-auto ms-auto d-print-none">
-                <div class="btn-list">
-                    <a class="btn">
-                        <!-- Download SVG icon from http://tabler-icons.io/i/player-pause -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <rect x="6" y="5" width="4" height="14" rx="1" />
-                            <rect x="14" y="5" width="4" height="14" rx="1" />
-                        </svg>
-                        Left Eye: DR <%= prediction.leftEyeDRLevel %>
-                    </a>
-                    <a class="btn">
-                        <!-- Download SVG icon from http://tabler-icons.io/i/player-pause -->
-                        <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
-                            viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                            stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                            <rect x="6" y="5" width="4" height="14" rx="1" />
-                            <rect x="14" y="5" width="4" height="14" rx="1" />
-                        </svg>
-                        Right Eye: DR <%= prediction.rightEyeDRLevel %>
-                    </a>
+        </div>
+    </div>
+
+    <!-- Page body -->
+    <div class="page-body">
+        <div class="container-xl">
+            <div class="row row-cards">
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="subheader">Scanned at</div>
+                            <div class="h3 m-0"><%= (prediction.createdAt).toLocaleString("en-IN", { dateStyle: "long", timeStyle: "short" }) %></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <% if (prediction.leftEyeDRLevel == 0) { %>
+                        <div class="ribbon bg-green">
+                        <% } else if (prediction.leftEyeDRLevel == 3) { %>
+                        <div class="ribbon bg-orange">
+                        <% } else if (prediction.leftEyeDRLevel == 4) { %>
+                        <div class="ribbon bg-red">
+                        <% } else { %>
+                        <div class="ribbon bg-yellow">
+                        <% } %>
+                            DR <%= prediction.leftEyeDRLevel %>
+                        </div>
+                        
+                        <div class="card-body">
+                            <div class="subheader">Left Eye</div>
+                            <div class="h3 m-0"><%= diseases[prediction.leftEyeDRLevel] %></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <% if (prediction.rightEyeDRLevel == 0) { %>
+                        <div class="ribbon bg-green">
+                        <% } else if (prediction.rightEyeDRLevel == 3) { %>
+                        <div class="ribbon bg-orange">
+                        <% } else if (prediction.rightEyeDRLevel == 4) { %>
+                        <div class="ribbon bg-red">
+                        <% } else { %>
+                        <div class="ribbon bg-yellow">
+                        <% } %>
+                            DR <%= prediction.rightEyeDRLevel %>
+                        </div>
+                        <div class="card-body">
+                            <div class="subheader">Right Eye</div>
+                            <div class="h3 m-0"><%= diseases[prediction.rightEyeDRLevel] %></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Left Eye Image: <strong>DR <%= prediction.leftEyeDRLevel %></strong></h3>
+                        </div>
+                        <div class="card-body">
+                            <img src="<%= prediction.leftEyeImage %>" alt="" class="card-img-top mb-2">
+                        </div>
+                        <div class="d-flex">
+                            <a href="<%= prediction.leftEyeImage %>" class="card-btn" download="left-eye">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-download"
+                                    width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2"></path>
+                                    <path d="M7 11l5 5l5 -5"></path>
+                                    <path d="M12 4l0 12"></path>
+                                </svg>
+                                &nbsp;Download
+                            </a>
+                            <a data-fslightbox="gallery" href="<%= prediction.leftEyeImage %>" class="card-btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-maximize"
+                                    width="24" height="24" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor"
+                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M4 8v-2a2 2 0 0 1 2 -2h2"></path>
+                                    <path d="M4 16v2a2 2 0 0 0 2 2h2"></path>
+                                    <path d="M16 4h2a2 2 0 0 1 2 2v2"></path>
+                                    <path d="M16 20h2a2 2 0 0 0 2 -2v-2"></path>
+                                </svg>
+                                &nbsp;View
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header border-0">
+                            <h3 class="card-title">Model Predictions for Left eye:</h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="chart-left-eye"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Right Eye Image: <strong>DR <%= prediction.rightEyeDRLevel %></strong></h3>
+                        </div>
+                        <div class="card-body">
+                            <img src="<%= prediction.rightEyeImage %>" alt="" class="card-img-top mb-1">
+                        </div>
+                        <div class="d-flex">
+                            <a href="<%= prediction.rightEyeImage %>" class="card-btn" download="right-eye">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-download"
+                                    width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
+                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2"></path>
+                                    <path d="M7 11l5 5l5 -5"></path>
+                                    <path d="M12 4l0 12"></path>
+                                </svg>
+                                &nbsp;Download
+                            </a>
+                            <a data-fslightbox="gallery" href="<%= prediction.rightEyeImage %>" class="card-btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-maximize"
+                                    width="24" height="24" viewBox="0 0 24 24" stroke-width="1" stroke="currentColor"
+                                    fill="none" stroke-linecap="round" stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path d="M4 8v-2a2 2 0 0 1 2 -2h2"></path>
+                                    <path d="M4 16v2a2 2 0 0 0 2 2h2"></path>
+                                    <path d="M16 4h2a2 2 0 0 1 2 2v2"></path>
+                                    <path d="M16 20h2a2 2 0 0 0 2 -2v-2"></path>
+                                </svg>
+                                &nbsp;View
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header border-0">
+                            <h3 class="card-title">Model Predictions for Right eye:</h3>
+                        </div>
+                        <div class="card-body">
+                            <div id="chart-right-eye"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
-<!-- Page body -->
-<div class="page-body">
-    <div class="container-xl">
-        <div class="row row-cards">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-body">
-                        <h3 class="card-title">Left Eye</h3>
-                        <div id="chart-left-eye"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h3 class="card-title">Left Eye Image</h3>
-                        <img src="<%= prediction.leftEyeImage %>" alt="" class="card-img-top p3">
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        <h3 class="card-title">Left Eye Image</h3>
-                        <img src="<%= prediction.rightEyeImage %>" alt="" class="card-img-top p3">
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-body">
-                        <h3 class="card-title">Right Eye</h3>
-                        <div id="chart-right-eye"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
 
-<%- include('partials/footer.ejs') %>
+    <%- include('partials/footer.ejs') %>

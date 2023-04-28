@@ -14,7 +14,7 @@
     <script src="/libs/apexcharts/dist/apexcharts.min.js?1668287865" defer></script>
     <script src="/js/jquery.min.js"></script>
     <script src="/js/custom.js"></script>
-
+    <script src="/libs/fslightbox/index.js?1668287865" defer></script>
 
     <script>
         // @formatter:off
@@ -26,7 +26,7 @@
                     height: 320,
                     parentHeightOffset: 0,
                     toolbar: {
-                        show: false,
+                        show: true,
                     },
                     animations: {
                         enabled: true
@@ -34,7 +34,7 @@
                 },
                 plotOptions: {
                     bar: {
-                        columnWidth: '50%',
+                        columnWidth: '25%',
                     }
                 },
                 dataLabels: {
@@ -44,7 +44,7 @@
                     opacity: 1,
                 },
                 series: [{
-                    name: "A",
+                    name: "Prediction",
                     data: [<%= prediction?.leftEyePredictions %>]
                 }],
                 tooltip: {
@@ -72,13 +72,15 @@
                     categories: ['DR0', 'DR1', 'DR2', 'DR3', 'DR4'],
                 },
                 yaxis: {
+                    tickAmount: 7,
+                    decimalsInFloat: 2,
                     labels: {
-                        padding: 4
+                        padding: 4,
                     },
                 },
                 colors: [tabler.getColor("primary")],
                 legend: {
-                    show: false,
+                    show: true,
                 },
             })).render();
         });
@@ -92,10 +94,10 @@
                 chart: {
                     type: "bar",
                     fontFamily: 'inherit',
-                    height: 300,
+                    height: 320,
                     parentHeightOffset: 0,
                     toolbar: {
-                        show: false,
+                        show: true,
                     },
                     animations: {
                         enabled: true
@@ -103,7 +105,7 @@
                 },
                 plotOptions: {
                     bar: {
-                        columnWidth: '50%',
+                        columnWidth: '25%',
                     }
                 },
                 dataLabels: {
@@ -113,7 +115,7 @@
                     opacity: 1,
                 },
                 series: [{
-                    name: "A",
+                    name: "Prediction",
                     data: [<%= prediction?.rightEyePredictions %>]
                 }],
                 tooltip: {
@@ -141,8 +143,10 @@
                     categories: ['DR0', 'DR1', 'DR2', 'DR3', 'DR4'],
                 },
                 yaxis: {
+                    tickAmount: 7,
+                    decimalsInFloat: 2,
                     labels: {
-                        padding: 4
+                        padding: 4,
                     },
                 },
                 colors: [tabler.getColor("primary")],

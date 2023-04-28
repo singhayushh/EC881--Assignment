@@ -1,0 +1,106 @@
+<%- include('partials/header.ejs') %>
+
+<div class="page-header d-print-none">
+    <div class="container-xl">
+        <div class="row g-2 align-items-center">
+            <div class="col">
+                <h2 class="page-title">
+                    Past Prediction Results
+                </h2>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Page body -->
+<div class="page-body">
+    <div class="container-xl">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card">
+                    <div class="list-group card-list-group">
+                        <% for (var i=0; i < predictions.length; i++) { prediction=predictions[i] %>
+                            <div class="list-group-item">
+                                <div class="row g-2 align-items-center">
+                                    <div class="col-auto fs-3">
+                                        <%= (i+1) %>
+                                    </div>
+                                    <div class="col-auto">
+                                        <img src="<%= prediction.leftEyeImage %>" class="rounded" alt="Górą ty"
+                                            width="40" height="40">
+                                    </div>
+                                    <div class="col">
+                                        <%= prediction.name %>
+                                            <div class="text-muted">
+                                                Left eye: DR <%= prediction.leftEyeDRLevel %> - Right eye: DR <%=
+                                                        prediction.rightEyeDRLevel %>
+                                            </div>
+                                    </div>
+                                    <div class="col-auto text-muted">
+                                        <%= (prediction.createdAt).toLocaleDateString("en-IN", { year: 'numeric' ,
+                                            month: 'long' , day: 'numeric' }) %>
+                                    </div>
+                                    <div class="col-auto lh-1">
+                                        <div class="dropdown">
+                                            <a href="#" class="link-secondary"
+                                                data-bs-toggle="dropdown"><!-- Download SVG icon from http://tabler-icons.io/i/dots -->
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24"
+                                                    height="24" viewBox="0 0 24 24" stroke-width="2"
+                                                    stroke="currentColor" fill="none" stroke-linecap="round"
+                                                    stroke-linejoin="round">
+                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                                                    <circle cx="5" cy="12" r="1" />
+                                                    <circle cx="12" cy="12" r="1" />
+                                                    <circle cx="19" cy="12" r="1" />
+                                                </svg>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-end">
+                                                <a class="dropdown-item" href="/result/<%= prediction.id %>">
+                                                    View
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <% } %>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="row row-cards">
+                    <div class="col-md-6 col-lg-12">
+                        <div class="card">
+                            <div class="card-header">
+                              <h3 class="card-title">
+                                Statistics
+                              </h3>
+                            </div>
+                            <div class="card-body">
+                              <dl class="row">
+                                <dt class="col-5">Total Scans:</dt>
+                                <dd class="col-7"><%= stats.scans %></dd>
+                                <dt class="col-5">DR0 Results:</dt>
+                                <dd class="col-7"><%= stats.dr0 %></dd>
+                                <dt class="col-5">DR1 Results:</dt>
+                                <dd class="col-7"><%= stats.dr1 %></dd>
+                                <dt class="col-5">DR2 Results:</dt>
+                                <dd class="col-7"><%= stats.dr2 %></dd>
+                                <dt class="col-5">DR3 Results:</dt>
+                                <dd class="col-7"><%= stats.dr3 %></dd>
+                                <dt class="col-5">DR4 Results:</dt>
+                                <dd class="col-7"><%= stats.dr4 %></dd>
+                                <dt class="col-5">Avg Scan Time:</dt>
+                                <dd class="col-7"><%= stats.execTime %> miliseconds</dd>
+                                <dt class="col-5">Last Scan:</dt>
+                                <dd class="col-7"><%= (predictions[predictions.length - 1].createdAt).toLocaleDateString("en-IN", { year: 'numeric', month: 'long', day: 'numeric' }) %></dd>
+                              </dl>
+                            </div>
+                          </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<%- include('partials/footer.ejs') %>

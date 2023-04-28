@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { Create, FetchByEmail } from "../auth/service";
-import { Create as CreatePrediction, FetchById } from "../prediction/service";
+import { Create as CreatePrediction, FetchAll, FetchById, FetchStats } from "../prediction/service";
 import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
 import { UserDto } from "../auth/dto";
@@ -59,9 +59,16 @@ const RenderPredict = async (req: Request, res: Response) => {
     return res.render("predict", { user: res.locals.user, prediction: {}, page: "predict" });
 };
 
+const RenderResults = async (req: Request, res: Response) => {
+    const predictions = await FetchAll();
+    const stats = FetchStats(predictions);
+    return res.render("results", { page: "results", predictions, stats, user: res.locals.user });
+}
+
 const RenderResult = async (req: Request, res: Response) => {
     const prediction = await FetchById(req.params.id);
-    return res.render("output", { user: res.locals.user, page: "predict", prediction });
+    const diseases = ["No Diabetic Retinopathy", "Mild Diabetic Retinopathy", "Moderate Diabetic Retinopathy", "Severe Diabetic Retinopathy", "Proliferative Diabetic Retinopathy"]
+    return res.render("output", { user: res.locals.user, page: "predict", prediction, diseases });
 };
 
 const RenderTeam = async (req: Request, res: Response) => {
@@ -134,7 +141,6 @@ const SignUp = async (req: Request, res: Response) => {
     return res.redirect("/predict");
 };
 
-
 export {
     GetPrediction,
     RenderAbout,
@@ -142,6 +148,7 @@ export {
     RenderHome,
     RenderPredict,
     RenderResult,
+    RenderResults,
     RenderSignIn,
     RenderSignUp,
     RenderTeam,
