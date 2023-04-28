@@ -1,25 +1,49 @@
 import { Request, Response } from "express";
 import { Create, FetchByEmail } from "../auth/service";
+import { Create as CreatePrediction, FetchById } from "../prediction/service";
 import { compare } from "bcrypt";
 import { sign } from "jsonwebtoken";
 import { UserDto } from "../auth/dto";
 import { spawnSync } from "child_process";
+import { randomBytes } from "crypto";
+import { PredictionDto } from "../prediction/dto";
 
 const GetPrediction = async (req: Request, res: Response) => {
     try {
         const files: any = req.files;
-        let predictionLeft = "", predictionRight = "";
+        
+        // start the timer to record time of execution
+        const start = new Date().getTime();
+
+        // run the prediction for left eye
         let script = spawnSync("python", ["scripts/predict.py", files.left_eye[0].path], { encoding: 'utf-8' })
-        predictionLeft = script.stdout;
+        const predictionLeft = (script.stdout).split(/\r?\n/);
+        
+        // run the prediction for right eye
         script = spawnSync("python", ["scripts/predict.py", files.right_eye[0].path], { encoding: "utf-8" })
-        predictionRight = script.stdout
+        const predictionRight = (script.stdout).split(/\r?\n/);
 
-        console.log(predictionLeft, predictionRight);
+        // stop the timer to record time of execution
+        const end = new Date().getTime();
 
-        return res.render("output", { user: res.locals.user, leftDRNumber: predictionLeft, rightDRNumber: predictionRight, leftEyePath: "/" + files.left_eye[0].filename, rightEyePath: "/" + files.right_eye[0].filename, page: "detect"});
+        // create the data transfer object for saving to database
+        const dto: PredictionDto = { ...req.body };
+        dto.id = randomBytes(3).toString("hex");;
+        dto.leftEyeDRLevel = Number(predictionLeft[1]);
+        dto.rightEyeDRLevel = Number(predictionRight[1]);
+        dto.leftEyePredictions = predictionLeft[2].replace(/^\[?|\]?$/g, "").trim().split(/\s+/).map(Number);
+        dto.rightEyePredictions = predictionRight[2].replace(/^\[?|\]?$/g, "").trim().split(/\s+/).map(Number);
+        dto.leftEyeImage = "/" + files.left_eye[0].filename;
+        dto.rightEyeImage = "/" + files.right_eye[0].filename;
+        dto.executionTime = end - start;
+
+        // save prediction to database
+        const prediction = await CreatePrediction(dto);
+
+        return res.status(200).json({ path: `/result/${prediction.id}` });
     } catch (error) {
-        console.log('error met');
-        res.redirect("/predict");
+        console.log(error)
+        return res.status(200).json({ path: `/result/error` });
     }
 };
 
@@ -32,7 +56,12 @@ const RenderAbout = async (req: Request, res: Response) => {
 };
 
 const RenderPredict = async (req: Request, res: Response) => {
-    return res.render("predict", { user: res.locals.user, page: "predict" });
+    return res.render("predict", { user: res.locals.user, prediction: {}, page: "predict" });
+};
+
+const RenderResult = async (req: Request, res: Response) => {
+    const prediction = await FetchById(req.params.id);
+    return res.render("output", { user: res.locals.user, page: "predict", prediction });
 };
 
 const RenderTeam = async (req: Request, res: Response) => {
@@ -112,6 +141,7 @@ export {
     RenderAcknowledgement,
     RenderHome,
     RenderPredict,
+    RenderResult,
     RenderSignIn,
     RenderSignUp,
     RenderTeam,

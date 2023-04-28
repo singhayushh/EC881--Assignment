@@ -1,4 +1,5 @@
 $(function () {
+    
     Dropzone.autoDiscover = false;
 
     const dropzones = []
@@ -15,7 +16,6 @@ $(function () {
         })
         dropzones.push(myDropzone)
     })
-
 
     document.querySelector("button[type=submit]").addEventListener("click", function (e) {
         // Make sure that the form isn't actually being sent.
@@ -36,8 +36,18 @@ $(function () {
             processData: false,
             contentType: false,
             success: function (response) {
-                document.write(response)
+                console.log(response);
+                window.location = response.path;
             }
         });
     });
+
+    $(document).ajaxStart(function(){
+        // Show image container
+        $("#loader").css({ visibility: 'visible' });
+        $("#main-form").hide();
+      });
+      $(document).ajaxComplete(function(){
+        $("#loader").hide();
+      });
 });

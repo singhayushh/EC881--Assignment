@@ -17,7 +17,7 @@
                 <div class="text-muted">
                     <ul class="list-inline list-inline-dots mb-0">
                         <li class="list-inline-item"><span class="text-green">Ready</span></li>
-                        <li class="list-inline-item">Ran just now</li>
+                        <li class="list-inline-item">Execution time: <%= prediction.executionTime %> miliseconds</li>
                     </ul>
                 </div>
             </div>
@@ -32,7 +32,7 @@
                             <rect x="6" y="5" width="4" height="14" rx="1" />
                             <rect x="14" y="5" width="4" height="14" rx="1" />
                         </svg>
-                        Left Eye: DR <%= leftDRNumber %>
+                        Left Eye: DR <%= prediction.leftEyeDRLevel %>
                     </a>
                     <a class="btn">
                         <!-- Download SVG icon from http://tabler-icons.io/i/player-pause -->
@@ -43,7 +43,7 @@
                             <rect x="6" y="5" width="4" height="14" rx="1" />
                             <rect x="14" y="5" width="4" height="14" rx="1" />
                         </svg>
-                        Right Eye: DR <%= rightDRNumber %>
+                        Right Eye: DR <%= prediction.rightEyeDRLevel %>
                     </a>
                 </div>
             </div>
@@ -67,7 +67,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h3 class="card-title">Left Eye Image</h3>
-                        <img src="<%= leftEyePath %>" alt="" class="card-img-top p3">
+                        <img src="<%= prediction.leftEyeImage %>" alt="" class="card-img-top p3">
                     </div>
                 </div>
             </div>
@@ -75,7 +75,7 @@
                 <div class="card">
                     <div class="card-body">
                         <h3 class="card-title">Left Eye Image</h3>
-                        <img src="<%= rightEyePath %>" alt="" class="card-img-top p3">
+                        <img src="<%= prediction.rightEyeImage %>" alt="" class="card-img-top p3">
                     </div>
                 </div>
             </div>

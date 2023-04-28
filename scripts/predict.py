@@ -14,7 +14,7 @@ MODEL = tf.keras.models.load_model((MODEL_PATH),custom_objects={'KerasLayer':hub
 def get_prediction(image_path):    
     reshaped_image = get_reduced_image(image_path)
     prediction = MODEL.predict(reshaped_image)
-
+    print(np.argmax(prediction))
     return prediction[0]
 
 def get_reduced_image(image_path):
