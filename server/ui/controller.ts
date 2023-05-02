@@ -18,6 +18,7 @@ const GetPrediction = async (req: Request, res: Response) => {
         // run the prediction for left eye
         let script = spawnSync("python", ["scripts/predict.py", files.left_eye[0].path], { encoding: 'utf-8' })
         const predictionLeft = (script.stdout).split(/\r?\n/);
+        console.log(predictionLeft)
         
         // run the prediction for right eye
         script = spawnSync("python", ["scripts/predict.py", files.right_eye[0].path], { encoding: "utf-8" })
@@ -29,10 +30,10 @@ const GetPrediction = async (req: Request, res: Response) => {
         // create the data transfer object for saving to database
         const dto: PredictionDto = { ...req.body };
         dto.id = randomBytes(3).toString("hex");;
-        dto.leftEyeDRLevel = Number(predictionLeft[1]);
-        dto.rightEyeDRLevel = Number(predictionRight[1]);
-        dto.leftEyePredictions = predictionLeft[2].replace(/^\[?|\]?$/g, "").trim().split(/\s+/).map(Number);
-        dto.rightEyePredictions = predictionRight[2].replace(/^\[?|\]?$/g, "").trim().split(/\s+/).map(Number);
+        dto.leftEyeDRLevel = Number(predictionLeft[3]);
+        dto.rightEyeDRLevel = Number(predictionRight[3]);
+        dto.leftEyePredictions = predictionLeft[4].replace(/^\[?|\]?$/g, "").trim().split(/\s+/).map(Number);
+        dto.rightEyePredictions = predictionRight[4].replace(/^\[?|\]?$/g, "").trim().split(/\s+/).map(Number);
         dto.leftEyeImage = "/" + files.left_eye[0].filename;
         dto.rightEyeImage = "/" + files.right_eye[0].filename;
         dto.executionTime = end - start;
@@ -42,6 +43,7 @@ const GetPrediction = async (req: Request, res: Response) => {
 
         return res.status(200).json({ path: `/result/${prediction.id}` });
     } catch (error) {
+        console.log(error);
         return res.status(200).json({ path: `/result/error` });
     }
 };
