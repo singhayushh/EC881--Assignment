@@ -18,8 +18,94 @@
                 <div class="col-12">
                     <div class="card card-lg">
                         <div class="card-body markdown">
-                            <h1>Content</h1>
-                            <p>More content</p>
+                            <h1>Methodoloy</h1>
+                            <p>
+                                The  data  originates  from  a  2015  Kaggle  competition  sponsored  by  the 
+                                California Healthcare Foundation. However, is an atypical Kaggle dataset. 
+                                In most Kaggle competitions, the data has already been cleaned, giving the 
+                                data scientist very little to pre-process. With this dataset, this isn't the case. 
+                                All images are taken of different people, using different cameras, and of 
+                                different  sizes.  Pertaining  to  the  pre-processing  section,  this  data  is 
+                                extremely noisy, and requires multiple pre-processing steps to get all images 
+                                to a useable format for training a model. 
+                                <br/>
+                                The  training  data  is  comprised  of 35,126  images,  which  are  augmented 
+                                during  pre-processing.  It  consists  of  large  set  of  high-resolution  retina 
+                                images taken under a variety of imaging conditions. A left and right field is 
+                                provided for every subject. Images are labelled with a subject id as well as 
+                                either left or right (e.g., 1_left.jpeg is the left eye of patient id 1). 
+                                A clinician has rated the presence of diabetic retinopathy in each image on 
+                                a scale of 0 to 4, according to the following scale: 
+                                <ul>
+                                <li>0 - No DR </li>
+                                <li>1 - Mild </li>
+                                <li>2 - Moderate </li>
+                                <li>3 - Severe </li>
+                                <li>4 - Proliferative DR </li>
+                                </ul>
+                            </p>
+                            <h2>
+                                Steps Included
+                            </h2>
+                            <p>
+Image  pre-processing  plays  a  crucial  role  in  improving  the  quality  and 
+consistency of input data for diabetic retinopathy classification using CNNs.  
+The pre-processing pipeline is the following: <br/>
+•  Download all images. <br/>
+•  Crop  &  resize  all  images  using  the  resizing  script  and  the  pre-
+processing script. <br/>
+•  Rotate & mirror all images using the rotation script. <br/>
+•  Convert all images to array of NumPy arrays, using the conversion 
+script. <br/><br/>
+Image Resizing: Resizing the input images to a standardized resolution is 
+essential  to  ensure  consistency  and  compatibility  across  the  dataset.  It 
+involves resizing all images to a specific size which is commonly used in 
+CNN architectures like MobileNet2, EfficientNet etc Resizing ensures that 
+the models can process the images efficiently and reduces computational 
+complexity. <br/><br/>
+All images were scaled down to 256 by 256. Despite taking longer to train, 
+the detail present in photos of this size is much greater than at 128 by 128. 
+Additionally, 403 images were dropped from the training set. Scikit-Image 
+raised multiple warnings during resizing, due to these images having no 
+colour space. Because of this, any images that were completely black were 
+removed from the training data. <br/><br/>
+Normalization: Normalizing the pixel values of the images is necessary to 
+bring them to a consistent scale and facilitate better convergence during 
+model training. This step involves transforming the pixel values from their 
+original  range  (e.g.,  0-255  for  8-bit  grayscale  or  RGB  images)  to  a 
+normalized  range,  typically  between  0  and  1.  Normalization  helps  in 
+mitigating the impact of varying illumination conditions and improves the 
+stability of the training process. 
+                            </p>
+                            <p>
+                                Data Augmentation: Data augmentation techniques can be employed to 
+increase the diversity and variability of the training data. These techniques 
+involve applying random transformations to the images, such as rotation, 
+scaling, flipping, and shifting. By generating new augmented images, the 
+dataset's size is effectively increased, which helps prevent overfitting and 
+improves the generalization capability of the models. Data augmentation is 
+particularly useful when the available dataset is limited. 
+All images  were rotated and  mirrored. Images without retinopathy were 
+mirrored; images that had retinopathy were mirrored, and rotated 90, 120, 
+180, and 270 degrees. The first images show two pairs of eyes, along with 
+the black borders. In the cropping and rotations how the majority of noise is 
+removed. 
+                            </p>
+                            <h3>CNN Model</h3>
+                            <p>
+                                This  project  utilizes  CNN-based  models  for  the  identification  and 
+                                classification  of  diabetic  retinopathy.  CNNs  are  a  class  of  deep  neural 
+                                networks that excel in extracting complex features from images, making 
+                                them well-suited for image classification tasks. Popular CNN architectures, 
+                                MobileNet and EfficientNet are employed to train the models. 
+                                CNNs consist of multiple layers, including convolutional layers, pooling 
+                                layers, and fully connected layers. Convolutional layers extract features by 
+                                applying filters to input images. Pooling layers reduce spatial dimensions, 
+                                downsampling the feature maps. Fully connected layers provide the final 
+                                classification based on the extracted features. MobileNet, EfficientNet, and 
+                                Inception are renowned CNN architectures known for their efficiency and 
+                                performance in image classification tasks. 
+                            </p>
                         </div>
                     </div>
                 </div>
