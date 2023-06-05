@@ -18,7 +18,6 @@ const GetPrediction = async (req: Request, res: Response) => {
         // run the prediction for left eye
         let script = spawnSync("python", ["scripts/predict.py", files.left_eye[0].path], { encoding: 'utf-8' })
         const predictionLeft = (script.stdout).split(/\r?\n/);
-        console.log(predictionLeft)
         
         // run the prediction for right eye
         script = spawnSync("python", ["scripts/predict.py", files.right_eye[0].path], { encoding: "utf-8" })
