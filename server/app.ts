@@ -25,7 +25,7 @@ app.set("views", path.join(__dirname, "../views"));
 app.use("/", UIRouter);
 app.use("/auth", AuthRouter);
 
-app.listen(PORT, () => {
-    ConnectDB(URI);
+app.listen(PORT, async () => {
+    await ConnectDB(URI);
     console.log('Server started at http://localhost:3000');
 });
