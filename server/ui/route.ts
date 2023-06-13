@@ -5,7 +5,7 @@ import { Auth } from "../auth/middleware";
 
 const UIRouter: Router = Router();
 
-UIRouter.get("/", Auth(true), ui.RenderHome);
+UIRouter.get("/", Auth(true), ui.RenderAbout);
 UIRouter.get("/team", Auth(true), ui.RenderTeam);
 UIRouter.get("/about", Auth(true), ui.RenderAbout);
 UIRouter.get("/sign-in", ui.RenderSignIn);
