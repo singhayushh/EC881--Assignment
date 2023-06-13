@@ -1,177 +1,193 @@
 <%- include('partials/header.ejs') %>
 
-<div class="page-wrapper">
-    <div class="page-header d-print-none">
-        <div class="container-xl">
-            <div class="row g-2 align-items-center">
-                <div class="col">
-                    <h2 class="page-title">
-                        Development of Low Cost Automated Diabetic Retinopathy Detection System for Rural India
-                    </h2>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="page-body">
-        <div class="container-xl">
-            <div class="row row-cards">
-                <div class="col-12">
-                    <div class="card card-lg">
-                        <div class="card-body markdown">
-                            <h1>Identification & Detection of Diabetic Retinopathy</h1>
-                            <p>Diabetic retinopathy (DR) is a severe eye disease that affects individuals
-                                with diabetes, leading to vision loss or even blindness if left untreated. Early
-                                detection and classification of DR is crucial for timely intervention and
-                                treatment. In this project, we propose a methodology for the identification
-                                and classification of diabetic retinopathy using Convolutional Neural
-                                Networks (CNN) and three popular CNN architectures: MobileNet2,
-                                EfficientNet, and Inception. We evaluate the performance of these models
-                                on a large dataset of retinal images and compare their accuracy, precision,
-                                recall, and F1-score. Our results demonstrate the effectiveness of CNN-
-                                based models in accurately identifying and classifying diabetic retinopathy,
-                                providing a potential solution for early diagnosis and treatment.
-                                </p>
-                                <p>
-                                Diabetic retinopathy poses a significant global health challenge, impacting
-                                millions of individuals with diabetes. Timely detection and appropriate
-                                management are vital for preventing irreversible vision loss. Recent
-                                advances in deep learning and computer vision have shown promising
-                                results in medical image analysis. This project seeks to leverage the power
-                                of CNNs and explore the performance of different CNN architectures to aid
-                                in the identification and classification of diabetic retinopathy. Developing
-                                accurate and efficient models can assist healthcare professionals in
-                                diagnosing and managing this debilitating eye disease more effectively.</p>
+    <div class="page-wrapper">
+        <div class="page-body">
+            <div class="container-xl">
+                <div class="row row-cards">
+                    <div class="col-12">
+                        <div class="card card-lg">
+                            <div class="card-body markdown">
+                                <h2>Development of Low Cost Automated Diabetic Retinopathy Detection
+                                    System for Rural India</h2>
+                                    <br/>
+                                <div class="row">
+                                    <div class="col-5">
+                                        <img src="/img/dr-lesions.png" alt="" height="300">
+                                    </div>
+                                    <div class="col-7">
+                                        <p style="text-align: justify;">
+                                            Diabetic retinopathy (DR) is a severe eye disease that affects individuals
+                                            with diabetes, leading to vision loss or even blindness if left untreated. Early
+                                            detection and classification of DR is crucial for timely intervention and
+                                            treatment. In this project, we propose a methodology for the identification
+                                            and classification of diabetic retinopathy using Convolutional Neural
+                                            Networks (CNN) and three popular CNN architectures: MobileNet2,
+                                            EfficientNet, and Inception. We evaluate the performance of these models
+                                            on a large dataset of retinal images and compare their accuracy, precision,
+                                            recall, and F1-score. Our results demonstrate the effectiveness of CNN-
+                                            based models in accurately identifying and classifying diabetic retinopathy,
+                                            providing a potential solution for early diagnosis and treatment.
+                                        </p>
+                                    </div>
+                                    <div class="col-12">
+                                        <p>
+                                            <br/>
+                                            Diabetic retinopathy poses a significant global health challenge, impacting
+                                            millions of individuals with diabetes. Timely detection and appropriate
+                                            management are vital for preventing irreversible vision loss. Recent
+                                            advances in deep learning and computer vision have shown promising
+                                            results in medical image analysis. This project seeks to leverage the power
+                                            of CNNs and explore the performance of different CNN architectures to aid
+                                            in the identification and classification of diabetic retinopathy. Developing
+                                            accurate and efficient models can assist healthcare professionals in
+                                            diagnosing and managing this debilitating eye disease more effectively.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="card card-lg">
+                            <div class="card-body markdown">
                                 <h2>What are the types of Diabetic Retinopathy?</h2>
-                                Diabetic retinopathy is categorized into two main types:  
+                                Diabetic retinopathy is categorized into two main types:
                                 <ul>
-                                <li>
-                                    Non-proliferative diabetic retinopathy (NPDR): Non-proliferative 
-                                diabetic  retinopathy  (NPDR)  is  the  early  stage  characterized  by 
-                                microaneurysms,  retinal  haemorrhages,  and  the  formation  of  hard 
-                                exudates.
-                                </li>
-                                <li>
-                                    Proliferative  diabetic  retinopathy  (PDR):  Proliferative  diabetic 
-                                retinopathy (PDR) is the advanced stage marked by the growth of 
-                                abnormal  blood  vessels  in  the  retina,  which  can  cause  retinal 
-                                detachment and severe vision loss. 
-                                </li>
+                                    <li>
+                                        Non-proliferative diabetic retinopathy (NPDR): Non-proliferative
+                                        diabetic retinopathy (NPDR) is the early stage characterized by
+                                        microaneurysms, retinal haemorrhages, and the formation of hard
+                                        exudates.
+                                    </li>
+                                    <li>
+                                        Proliferative diabetic retinopathy (PDR): Proliferative diabetic
+                                        retinopathy (PDR) is the advanced stage marked by the growth of
+                                        abnormal blood vessels in the retina, which can cause retinal
+                                        detachment and severe vision loss.
+                                    </li>
                                 </ul>
                                 <h2>ICDR Classification of Diabetic Retinopathy. </h2>
                                 <p>
-                                    
-                                    The International Clinic Diabetic Retinopathy (ICDR) classification was 
-                                    published  in  2003  after  a  consensus  of  31  retina  specialists, 
-                                    endocrinologists, and epidemiologists from 16 countries and sponsored by 
-                                    the American Academy of Ophthalmology. The ICDR classified DR on a 
-                                    five-stage severity scale and classified diabetic macular edema as apparently absent or present.  <br><br>
-                                    ICDR  is  applied  in  the  EYEPACS  dataset,  Asian  Pacific  Tele-
-                                    Ophthalmology  Society  dataset,  Indian  Diabetic  Retinopathy  Image 
-                                    Dataset,  Messidor  1  and  2  datasets  which  have  been  consulted  for  our 
-                                    project. 
-                                    The types are: - 
-                                    <ul>
-                                        <li>No Diabetic Retinopathy  </li>
-                                        <li>Mild Diabetic Retinopathy  </li>
-                                        <li>Moderate Diabetic Retinopathy </li>
-                                        <li>Severe Diabetic Retinopathy </li>
-                                        <li>Proliferative Diabetic Retinopathy </li>
-                                    </ul>
-                                </p>
-                            <h1>Methodoloy</h1>
-                            <p>
-                                The  data  originates  from  a  2015  Kaggle  competition  sponsored  by  the 
-                                California Healthcare Foundation. However, is an atypical Kaggle dataset. 
-                                In most Kaggle competitions, the data has already been cleaned, giving the 
-                                data scientist very little to pre-process. With this dataset, this isn't the case. 
-                                All images are taken of different people, using different cameras, and of 
-                                different  sizes.  Pertaining  to  the  pre-processing  section,  this  data  is 
-                                extremely noisy, and requires multiple pre-processing steps to get all images 
-                                to a useable format for training a model. 
-                                <br/>
-                                The  training  data  is  comprised  of 35,126  images,  which  are  augmented 
-                                during  pre-processing.  It  consists  of  large  set  of  high-resolution  retina 
-                                images taken under a variety of imaging conditions. A left and right field is 
-                                provided for every subject. Images are labelled with a subject id as well as 
-                                either left or right (e.g., 1_left.jpeg is the left eye of patient id 1). 
-                                A clinician has rated the presence of diabetic retinopathy in each image on 
-                                a scale of 0 to 4, according to the following scale: 
+
+                                    The International Clinic Diabetic Retinopathy (ICDR) classification was
+                                    published in 2003 after a consensus of 31 retina specialists,
+                                    endocrinologists, and epidemiologists from 16 countries and sponsored by
+                                    the American Academy of Ophthalmology. The ICDR classified DR on a
+                                    five-stage severity scale and classified diabetic macular edema as apparently absent
+                                    or present. <br><br>
+                                    ICDR is applied in the EYEPACS dataset, Asian Pacific Tele-
+                                    Ophthalmology Society dataset, Indian Diabetic Retinopathy Image
+                                    Dataset, Messidor 1 and 2 datasets which have been consulted for our
+                                    project.
+                                    The types are: -
                                 <ul>
-                                <li>0 - No DR </li>
-                                <li>1 - Mild </li>
-                                <li>2 - Moderate </li>
-                                <li>3 - Severe </li>
-                                <li>4 - Proliferative DR </li>
+                                    <li>No Diabetic Retinopathy </li>
+                                    <li>Mild Diabetic Retinopathy </li>
+                                    <li>Moderate Diabetic Retinopathy </li>
+                                    <li>Severe Diabetic Retinopathy </li>
+                                    <li>Proliferative Diabetic Retinopathy </li>
                                 </ul>
-                            </p>
-                            <h2>
-                                Steps Included
-                            </h2>
-                            <p>
-Image  pre-processing  plays  a  crucial  role  in  improving  the  quality  and 
-consistency of input data for diabetic retinopathy classification using CNNs.  
-The pre-processing pipeline is the following: <br/>
-•  Download all images. <br/>
-•  Crop  &  resize  all  images  using  the  resizing  script  and  the  pre-
-processing script. <br/>
-•  Rotate & mirror all images using the rotation script. <br/>
-•  Convert all images to array of NumPy arrays, using the conversion 
-script. <br/><br/>
-Image Resizing: Resizing the input images to a standardized resolution is 
-essential  to  ensure  consistency  and  compatibility  across  the  dataset.  It 
-involves resizing all images to a specific size which is commonly used in 
-CNN architectures like MobileNet2, EfficientNet etc Resizing ensures that 
-the models can process the images efficiently and reduces computational 
-complexity. <br/><br/>
-All images were scaled down to 256 by 256. Despite taking longer to train, 
-the detail present in photos of this size is much greater than at 128 by 128. 
-Additionally, 403 images were dropped from the training set. Scikit-Image 
-raised multiple warnings during resizing, due to these images having no 
-colour space. Because of this, any images that were completely black were 
-removed from the training data. <br/><br/>
-Normalization: Normalizing the pixel values of the images is necessary to 
-bring them to a consistent scale and facilitate better convergence during 
-model training. This step involves transforming the pixel values from their 
-original  range  (e.g.,  0-255  for  8-bit  grayscale  or  RGB  images)  to  a 
-normalized  range,  typically  between  0  and  1.  Normalization  helps  in 
-mitigating the impact of varying illumination conditions and improves the 
-stability of the training process. 
-                            </p>
-                            <p>
-                                Data Augmentation: Data augmentation techniques can be employed to 
-increase the diversity and variability of the training data. These techniques 
-involve applying random transformations to the images, such as rotation, 
-scaling, flipping, and shifting. By generating new augmented images, the 
-dataset's size is effectively increased, which helps prevent overfitting and 
-improves the generalization capability of the models. Data augmentation is 
-particularly useful when the available dataset is limited. 
-All images  were rotated and  mirrored. Images without retinopathy were 
-mirrored; images that had retinopathy were mirrored, and rotated 90, 120, 
-180, and 270 degrees. The first images show two pairs of eyes, along with 
-the black borders. In the cropping and rotations how the majority of noise is 
-removed. 
-                            </p>
-                            <h3>CNN Model</h3>
-                            <p>
-                                This  project  utilizes  CNN-based  models  for  the  identification  and 
-                                classification  of  diabetic  retinopathy.  CNNs  are  a  class  of  deep  neural 
-                                networks that excel in extracting complex features from images, making 
-                                them well-suited for image classification tasks. Popular CNN architectures, 
-                                MobileNet and EfficientNet are employed to train the models. 
-                                CNNs consist of multiple layers, including convolutional layers, pooling 
-                                layers, and fully connected layers. Convolutional layers extract features by 
-                                applying filters to input images. Pooling layers reduce spatial dimensions, 
-                                downsampling the feature maps. Fully connected layers provide the final 
-                                classification based on the extracted features. MobileNet, EfficientNet, and 
-                                Inception are renowned CNN architectures known for their efficiency and 
-                                performance in image classification tasks. 
-                            </p>
+                                </p>
+                                </div>
+                                </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="card card-lg">
+                                        <div class="card-body markdown">
+                                <h1>Methodoloy</h1>
+                                <p>
+                                    The data originates from a 2015 Kaggle competition sponsored by the
+                                    California Healthcare Foundation. However, is an atypical Kaggle dataset.
+                                    In most Kaggle competitions, the data has already been cleaned, giving the
+                                    data scientist very little to pre-process. With this dataset, this isn't the case.
+                                    All images are taken of different people, using different cameras, and of
+                                    different sizes. Pertaining to the pre-processing section, this data is
+                                    extremely noisy, and requires multiple pre-processing steps to get all images
+                                    to a useable format for training a model.
+                                    <br />
+                                    The training data is comprised of 35,126 images, which are augmented
+                                    during pre-processing. It consists of large set of high-resolution retina
+                                    images taken under a variety of imaging conditions. A left and right field is
+                                    provided for every subject. Images are labelled with a subject id as well as
+                                    either left or right (e.g., 1_left.jpeg is the left eye of patient id 1).
+                                    A clinician has rated the presence of diabetic retinopathy in each image on
+                                    a scale of 0 to 4, according to the following scale:
+                                <ul>
+                                    <li>0 - No DR </li>
+                                    <li>1 - Mild </li>
+                                    <li>2 - Moderate </li>
+                                    <li>3 - Severe </li>
+                                    <li>4 - Proliferative DR </li>
+                                </ul>
+                                </p>
+                                <h2>
+                                    Steps Included
+                                </h2>
+                                <p>
+                                    Image pre-processing plays a crucial role in improving the quality and
+                                    consistency of input data for diabetic retinopathy classification using CNNs.
+                                    The pre-processing pipeline is the following: <br />
+                                    • Download all images. <br />
+                                    • Crop & resize all images using the resizing script and the pre-
+                                    processing script. <br />
+                                    • Rotate & mirror all images using the rotation script. <br />
+                                    • Convert all images to array of NumPy arrays, using the conversion
+                                    script. <br /><br />
+                                    Image Resizing: Resizing the input images to a standardized resolution is
+                                    essential to ensure consistency and compatibility across the dataset. It
+                                    involves resizing all images to a specific size which is commonly used in
+                                    CNN architectures like MobileNet2, EfficientNet etc Resizing ensures that
+                                    the models can process the images efficiently and reduces computational
+                                    complexity. <br /><br />
+                                    All images were scaled down to 256 by 256. Despite taking longer to train,
+                                    the detail present in photos of this size is much greater than at 128 by 128.
+                                    Additionally, 403 images were dropped from the training set. Scikit-Image
+                                    raised multiple warnings during resizing, due to these images having no
+                                    colour space. Because of this, any images that were completely black were
+                                    removed from the training data. <br /><br />
+                                    Normalization: Normalizing the pixel values of the images is necessary to
+                                    bring them to a consistent scale and facilitate better convergence during
+                                    model training. This step involves transforming the pixel values from their
+                                    original range (e.g., 0-255 for 8-bit grayscale or RGB images) to a
+                                    normalized range, typically between 0 and 1. Normalization helps in
+                                    mitigating the impact of varying illumination conditions and improves the
+                                    stability of the training process.
+                                </p>
+                                <p>
+                                    Data Augmentation: Data augmentation techniques can be employed to
+                                    increase the diversity and variability of the training data. These techniques
+                                    involve applying random transformations to the images, such as rotation,
+                                    scaling, flipping, and shifting. By generating new augmented images, the
+                                    dataset's size is effectively increased, which helps prevent overfitting and
+                                    improves the generalization capability of the models. Data augmentation is
+                                    particularly useful when the available dataset is limited.
+                                    All images were rotated and mirrored. Images without retinopathy were
+                                    mirrored; images that had retinopathy were mirrored, and rotated 90, 120,
+                                    180, and 270 degrees. The first images show two pairs of eyes, along with
+                                    the black borders. In the cropping and rotations how the majority of noise is
+                                    removed.
+                                </p>
+                                <h3>CNN Model</h3>
+                                <p>
+                                    This project utilizes CNN-based models for the identification and
+                                    classification of diabetic retinopathy. CNNs are a class of deep neural
+                                    networks that excel in extracting complex features from images, making
+                                    them well-suited for image classification tasks. Popular CNN architectures,
+                                    MobileNet and EfficientNet are employed to train the models.
+                                    CNNs consist of multiple layers, including convolutional layers, pooling
+                                    layers, and fully connected layers. Convolutional layers extract features by
+                                    applying filters to input images. Pooling layers reduce spatial dimensions,
+                                    downsampling the feature maps. Fully connected layers provide the final
+                                    classification based on the extracted features. MobileNet, EfficientNet, and
+                                    Inception are renowned CNN architectures known for their efficiency and
+                                    performance in image classification tasks.
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
-<%- include('partials/footer.ejs') %>
+    <%- include('partials/footer.ejs') %>
